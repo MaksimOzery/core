@@ -379,6 +379,16 @@ abstract class BaseModel
         return $this->internalData->getFlatNodes();
     }
 
+	/**
+     * get nodes as array structure
+     * @return array
+     */
+
+	   public function ValidationArray($data)
+    {
+        return $this->internalData->ValidationArray($data);
+    }
+
     /**
      * get nodes as array structure
      * @return array

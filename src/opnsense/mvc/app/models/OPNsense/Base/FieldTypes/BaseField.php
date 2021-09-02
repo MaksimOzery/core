@@ -748,4 +748,35 @@ abstract class BaseField
         $parts = explode("\\", get_class($this));
         return $parts[count($parts) - 1];
     }
+
+
+
+
+	 public function ValidationArray($data)
+    {
+        foreach($data as $key => $value){
+			if(is_string($data[$key])!=true){
+				return true;
+			}
+		}
+		return false;
+
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

@@ -376,22 +376,25 @@ abstract class ApiMutableModelControllerBase extends ApiControllerBase
                 $tmp = $tmp->{$step};
             }
             $node = $tmp->Add();
-            $node->setNodes($this->request->getPost($post_field));
-            if (is_array($overlay)) {
-                $node->setNodes($overlay);
-            }
-            $result = $this->validate($node, $post_field);
+			if($node->ValidationArray($this->request->getPost($post_field))==false){
+			$node->setNodes($this->request->getPost($post_field));
+				if (is_array($overlay)) {
+					$node->setNodes($overlay);
+				}
 
-            if (empty($result['validations'])) {
-                // save config if validated correctly
-                $this->save();
-                $result = array(
-                    "result" => "saved",
-                    "uuid" => $node->getAttribute('uuid')
-                );
-            } else {
-                $result["result"] = "failed";
-            }
+				$result = $this->validate($node, $post_field);
+
+				if (empty($result['validations'])) {
+					// save config if validated correctly
+					$this->save();
+					$result = array(
+						"result" => "saved",
+						"uuid" => $node->getAttribute('uuid')
+					);
+				} else {
+					$result["result"] = "failed";
+				}
+			}
         }
         return $result;
     }
@@ -508,4 +511,18 @@ abstract class ApiMutableModelControllerBase extends ApiControllerBase
         }
         return $result;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
